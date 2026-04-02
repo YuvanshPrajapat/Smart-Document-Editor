@@ -1,0 +1,60 @@
+# Python cache
+
+**pycache**/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+
+venv/
+env/
+.venv/
+
+# Environment variables (VERY IMPORTANT)
+
+.env
+
+# Logs
+
+*.log
+
+# SQLite / DB files
+
+*.sqlite3
+*.db
+
+# OS files
+
+.DS_Store
+Thumbs.db
+
+# IDE/editor folders
+
+.vscode/
+.idea/
+
+# Pytest / coverage
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build / packaging
+
+build/
+dist/
+*.egg-info/
+
+# FastAPI / uvicorn temp
+
+*.pid
+
+# Node (if any leftover frontend stuff)
+
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Misc
+
+*.swp
