@@ -33,27 +33,25 @@ async def register_user(user: UserCreate):
     # 4. Insert into MongoDB
     await users_collection.insert_one(user_dict)
     
-    # 5. Return the created user (FastAPI automatically uses UserResponse to hide the password)
+    # 5. Return the created user (FastAPI uses UserResponse to hide the password)
     return user_dict
 
 
 @router.post("/login", response_model=Token)
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
-    # Note: OAuth2PasswordRequestForm uses 'username' by default, but we will pass the email into it from the frontend.
-    
-    # 1. Find the user by email
-    user = await users_collection.find_one({"email": form_data.username})
+    # 1. Find the user by USERNAME
+    user = await users_collection.find_one({"username": form_data.username})
     
     # 2. Check if user exists AND password is correct
     if not user or not verify_password(form_data.password, user["hashed_password"]):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect email or password",
+            detail="Incorrect username or password", # Updated the error message!
             headers={"WWW-Authenticate": "Bearer"},
         )
     
     # 3. Create the JWT Token
-    access_token = create_access_token(data={"sub": user["email"]})
+    access_token = create_access_token(data={"sub": user["username"]})
     
     # 4. Return the token to the user
     return {"access_token": access_token, "token_type": "bearer"}
