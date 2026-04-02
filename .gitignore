@@ -27,6 +27,8 @@ env/
 
 .DS_Store
 Thumbs.db
+ehthumbs.db
+Desktop.ini
 
 # IDE/editor folders
 
@@ -49,7 +51,7 @@ dist/
 
 *.pid
 
-# Node (if any leftover frontend stuff)
+# Node
 
 node_modules/
 npm-debug.log
@@ -58,3 +60,19 @@ yarn-error.log
 # Misc
 
 *.swp
+
+
+# Byte-compiled C extensions
+*.so
+
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Coverage for CI/CD
+.coverage.*
+.coverage
+coverage.xml
+
+# Local history (PyCharm, VSCode)
+.idea/.idea/
+.vscode/.history/
