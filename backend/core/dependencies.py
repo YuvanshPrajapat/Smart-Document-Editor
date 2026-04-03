@@ -18,16 +18,16 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
         # 1. Decode the JWT token using your secret key
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         
-        # 2. Extract the email (which we saved as the "sub" in auth_routes.py)
-        email: str = payload.get("sub")
-        if email is None:
+        # 2. Extract the USERNAME (which we saved as the "sub" in auth_routes.py)
+        username: str = payload.get("sub")
+        if username is None:
             raise credentials_exception
             
     except jwt.PyJWTError: # Catches expired or invalid tokens
         raise credentials_exception
         
-    # 3. Look up the user in MongoDB
-    user = await users_collection.find_one({"email": email})
+    # 3. Look up the user in MongoDB by their USERNAME
+    user = await users_collection.find_one({"username": username})
     if user is None:
         raise credentials_exception
         
