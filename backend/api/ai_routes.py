@@ -1,19 +1,3 @@
-# from fastapi import APIRouter, Depends
-# from core.dependencies import get_current_user
-
-# router = APIRouter(prefix="/ai", tags=["AI Features"])
-
-# @router.post("/ocr")
-# async def extract_text(current_user: dict = Depends(get_current_user)):
-#     # TODO: Suvarn will replace this with his image processing and OCR code
-#     return {"message": "OCR endpoint is live and ready for Suvarn's code!"}
-
-# @router.post("/formula")
-# async def extract_formula(current_user: dict = Depends(get_current_user)):
-#     # TODO: Suvarn will replace this with his LaTeX formula extraction code
-#     return {"message": "Formula endpoint is live and ready for Suvarn's code!"}
-
-# api/ai_routes.py
 from fastapi import APIRouter, Depends, File, UploadFile, HTTPException
 from core.dependencies import get_current_user
 import io
