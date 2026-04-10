@@ -66,3 +66,15 @@ async def update_document(doc_id: str, doc_update: DocumentCreate, current_user:
         
     updated_doc["id"] = str(updated_doc["_id"])
     return updated_doc
+    
+# 5. DELETE a document
+@router.delete("/{doc_id}")
+async def delete_document(doc_id: str, current_user: dict = Depends(get_current_user)):
+    # Find the document by ID and delete it from the database
+    result = await docs_collection.delete_one({"_id": ObjectId(doc_id)})
+   
+    # If the database couldn't find it to delete it, throw an error
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Document not found")
+       
+    return {"message": "Document deleted successfully"}
